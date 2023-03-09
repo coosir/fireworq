@@ -1,7 +1,7 @@
 package worker
 
 import (
-	"github.com/fireworq/fireworq/jobqueue"
+	"github.com/coosir/middleman/jobqueue"
 )
 
 // Worker is an interface of a worker which handles a dispatched job.

@@ -10,11 +10,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
-	repository "github.com/fireworq/fireworq/repository/factory"
-	"github.com/fireworq/fireworq/test"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
+	repository "github.com/coosir/middleman/repository/factory"
+	"github.com/coosir/middleman/test"
 )
 
 func TestMain(m *testing.M) {

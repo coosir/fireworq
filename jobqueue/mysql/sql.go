@@ -1,24 +1,22 @@
-//go:generate go-assets-builder -p mysql -o assets.go ../../data/jobqueue/mysql
-
 package mysql
 
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"github.com/coosir/middleman/data"
 	"regexp"
 	"strings"
 	"text/template"
 
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/model"
 )
 
 func newTableName(definition *model.Queue) *tableName {
 	re := invalidTablenameChars
 	name := string(re.ReplaceAll([]byte(definition.Name), []byte{'_'}))
 	return &tableName{
-		JobQueue: strings.Join([]string{"fireworq_jq(", name, ")"}, ""),
-		Failure:  strings.Join([]string{"fireworq_jq_fail(", name, ")"}, ""),
+		JobQueue: strings.Join([]string{"middleman_jq(", name, ")"}, ""),
+		Failure:  strings.Join([]string{"middleman_jq_fail(", name, ")"}, ""),
 	}
 }
 
@@ -101,17 +99,12 @@ var (
 )
 
 func mustLoadTemplate(name string) *template.Template {
-	f, err := Assets.Open(fmt.Sprintf("/data/jobqueue/mysql/%s.sql", name))
+	f, err := data.EFS.ReadFile(fmt.Sprintf("jobqueue/mysql/%s.sql", name))
 	if err != nil {
 		panic("Cannot load template (" + name + "): " + err.Error())
 	}
 
-	buf, err := ioutil.ReadAll(f)
-	if err != nil {
-		panic("Cannot load template (" + name + "): " + err.Error())
-	}
-
-	tmpl, err := template.New(name).Parse(string(buf))
+	tmpl, err := template.New(name).Parse(string(f))
 	if err != nil {
 		panic("Cannot load template (" + name + "): " + err.Error())
 	}

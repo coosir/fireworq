@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/repository"
-	"github.com/fireworq/fireworq/repository/inmemory"
-	"github.com/fireworq/fireworq/repository/mysql"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/repository"
+	"github.com/coosir/middleman/repository/inmemory"
+	"github.com/coosir/middleman/repository/mysql"
 
 	"github.com/rs/zerolog/log"
 )

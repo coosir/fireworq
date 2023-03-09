@@ -3,7 +3,7 @@ package jobqueue
 import (
 	"time"
 
-	"github.com/fireworq/fireworq/jobqueue/logger"
+	"github.com/coosir/middleman/jobqueue/logger"
 )
 
 // IncomingJob is an interface of incoming jobs.

@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/fireworq/fireworq/dispatcher"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/jobqueue/factory"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/dispatcher"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/jobqueue/factory"
+	"github.com/coosir/middleman/model"
 )
 
 // RunningQueue is an interface of a running queue, which is a job

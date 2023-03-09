@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/test/mysql"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/test/mysql"
 )
 
 func runWithMySQL(block func()) error {

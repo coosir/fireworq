@@ -16,7 +16,7 @@ func With(dsn string, block func()) error {
 	}
 	defer db.Close()
 
-	lockName := "fireworq_mysqltest"
+	lockName := "middleman_mysqltest"
 	_, err = db.Exec(fmt.Sprintf(`SELECT GET_LOCK('%s', 65536)`, lockName))
 	if err != nil {
 		return err

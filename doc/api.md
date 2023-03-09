@@ -1,7 +1,7 @@
 API
 ===
 
-All operations on Fireworq are done via HTTP API.  The following
+All operations on Middleman are done via HTTP API.  The following
 operations are supported.
 
 - [Queue Management][section-api-queue]
@@ -148,7 +148,7 @@ HTTP/1.1 200 OK
 
 Creates a new queue or override the definition of an existing queue.
 
-After putting a new queue, it may not be available immediately under [clustering multiple instances][section-backup].  In such case, a queue put to a host becomes available on another host after at most [`FIREWORQ_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval].
+After putting a new queue, it may not be available immediately under [clustering multiple instances][section-backup].  In such case, a queue put to a host becomes available on another host after at most [`MIDDLEMAN_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval].
 
 ```http
 PUT /queue/test_queue1 HTTP/1.1
@@ -172,8 +172,8 @@ HTTP/1.1 200 OK
 |Parameters in the request  |Meaning                              |Note          |
 |:--------------------------|:------------------------------------|:-------------|
 |`queue_name`               |The name of the target queue.        |mandatory     |
-|`polling_interval`         |An interval, in milliseconds, at which Fireworq checks the arrival of new jobs in this queue.|optional, defaults to [`FIREWORQ_QUEUE_DEFAULT_POLLING_INTERVAL`][env-queue-default-polling-interval]|
-|`max_workers`              |The maximum number of jobs that are processed simultaneously for this queue.|optional, defaults to [`FIREWORQ_QUEUE_DEFAULT_MAX_WORKERS`][env-queue-default-max-workers]|
+|`polling_interval`         |An interval, in milliseconds, at which Middleman checks the arrival of new jobs in this queue.|optional, defaults to [`MIDDLEMAN_QUEUE_DEFAULT_POLLING_INTERVAL`][env-queue-default-polling-interval]|
+|`max_workers`              |The maximum number of jobs that are processed simultaneously for this queue.|optional, defaults to [`MIDDLEMAN_QUEUE_DEFAULT_MAX_WORKERS`][env-queue-default-max-workers]|
 |`max_dispatches_per_second`|The maximum floating-point number of dispatches allowed to be processed within a second for this queue.|optional, defaults to no throttling. When throttling is configured, `polling_interval` is fixed to `100` regardless of the default interval|
 |`max_burst_size`           |The maximum number of burst size of throttling configuration for this queue.|optional, configured with `max_dispatches_per_second`|
 
@@ -187,7 +187,7 @@ Deletes a queue.
 
 Deleting a queue will not delete routings related to the queue; you are responsible to [delete][api-delete-routing] or [modify][api-put-routing] them before deleting the queue.
 
-Deleting a queue will not truncate the job list data store of the queue; it will be recovered if you recreate a queue of the same name.  Under [clustering multiple instances][section-backup], other instances may continue pushing jobs into the queue until the queue definition is synchronized.  This happens at most [`FIREWORQ_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval] after the queue has been deleted.
+Deleting a queue will not truncate the job list data store of the queue; it will be recovered if you recreate a queue of the same name.  Under [clustering multiple instances][section-backup], other instances may continue pushing jobs into the queue until the queue definition is synchronized.  This happens at most [`MIDDLEMAN_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval] after the queue has been deleted.
 
 If you delete [the default queue][env-queue-default], the queue will be recreated when the queue definitions are reloaded.
 
@@ -327,7 +327,7 @@ HTTP/1.1 200 OK
 
 Creates a new routing or override the definition of an existing routing.
 
-After putting a new routing, it may not be available immediately under [clustering multiple instances][section-backup].  In such case, a routing put to a host becomes available on another host after at most [`FIREWORQ_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval].
+After putting a new routing, it may not be available immediately under [clustering multiple instances][section-backup].  In such case, a routing put to a host becomes available on another host after at most [`MIDDLEMAN_CONFIG_REFRESH_INTERVAL`][env-config-refresh-interval].
 
 ```http
 PUT /routing/test_job1 HTTP/1.1

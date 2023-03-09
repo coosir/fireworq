@@ -3,7 +3,7 @@ package web
 import (
 	"strconv"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 )
 
 var disableKeepAlives = true

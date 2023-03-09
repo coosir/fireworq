@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/dispatcher/kicker"
-	"github.com/fireworq/fireworq/dispatcher/worker"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/jobqueue/logger"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/dispatcher/kicker"
+	"github.com/coosir/middleman/dispatcher/worker"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/jobqueue/logger"
+	"github.com/coosir/middleman/model"
 
 	"golang.org/x/time/rate"
 )

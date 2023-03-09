@@ -4,10 +4,10 @@ import (
 	"context"
 	"sync"
 
-	"github.com/fireworq/fireworq/dispatcher/kicker"
-	"github.com/fireworq/fireworq/dispatcher/worker"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/dispatcher/kicker"
+	"github.com/coosir/middleman/dispatcher/worker"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

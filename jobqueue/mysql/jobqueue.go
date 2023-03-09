@@ -14,9 +14,9 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
 )
 
 // Dsn returns the data source name of the storage specified in the

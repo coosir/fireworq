@@ -20,7 +20,7 @@ func TestGetSet(t *testing.T) {
 		t.Error("It should return stored config value")
 	}
 
-	os.Setenv("FIREWORQ_TEST_FALLBACK_1", "env-value1")
+	os.Setenv("MIDDLEMAN_TEST_FALLBACK_1", "env-value1")
 	if Get("test_fallback_1") != "env-value1" {
 		t.Error("It should fallback to environment")
 	}
@@ -30,7 +30,7 @@ func TestGetSet(t *testing.T) {
 		t.Error("It should fallback to the default value")
 	}
 
-	os.Setenv("FIREWORQ_TEST_FALLBACK_3", "env-value3")
+	os.Setenv("MIDDLEMAN_TEST_FALLBACK_3", "env-value3")
 	SetDefault("test_fallback_3", "default-value3")
 	if Get("test_fallback_3") != "env-value3" {
 		t.Error("A value from environment variable should have higher precedence than the default value")
@@ -52,7 +52,7 @@ func TestGetSetDefault(t *testing.T) {
 		t.Error("It should return stored config value")
 	}
 
-	os.Setenv("FIREWORQ_TEST_NO_FALLBACK_1", "env-value1")
+	os.Setenv("MIDDLEMAN_TEST_NO_FALLBACK_1", "env-value1")
 	if GetDefault("test_no_fallback_1") != "" {
 		t.Error("It should not fallback to environment")
 	}

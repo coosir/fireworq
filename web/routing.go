@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/repository"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/repository"
 
 	"github.com/gorilla/mux"
 )

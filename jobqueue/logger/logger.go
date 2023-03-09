@@ -4,8 +4,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-	logwriter "github.com/fireworq/fireworq/log"
+	"github.com/coosir/middleman/config"
+	logwriter "github.com/coosir/middleman/log"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

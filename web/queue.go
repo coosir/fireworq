@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/fireworq/fireworq/dispatcher"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/dispatcher"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
 
 	"github.com/gorilla/mux"
 )

@@ -18,7 +18,7 @@ var cached = config{
 // Get returns the current configuration value of a key.
 //
 // If it has no specific value, it falls back to a value of
-// environment variable starting with "FIREWORQ_" and then a default
+// environment variable starting with "MIDDLEMAN_" and then a default
 // value which is returned from GetDefault.
 func Get(key string) string {
 	cached.RLock()
@@ -28,7 +28,7 @@ func Get(key string) string {
 		return v
 	}
 
-	envKey := "FIREWORQ_" + strings.ToUpper(key)
+	envKey := "MIDDLEMAN_" + strings.ToUpper(key)
 	v = os.Getenv(envKey)
 	if v == "" {
 		v = GetDefault(key)

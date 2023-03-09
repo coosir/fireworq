@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 )
 
 func TestLogOutput(t *testing.T) {

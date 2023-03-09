@@ -42,7 +42,7 @@ Each line in the file is a JSON string corresponds to a single log item.
 `,
 	},
 	"access_log_tag": {
-		defaultValue: "fireworq.access",
+		defaultValue: "middleman.access",
 		label:        "<tag>",
 		description: `
 Specifies the value of ` + "`" + `tag` + "`" + ` field in a access log item.
@@ -83,7 +83,7 @@ Specifies whether connections should be reused.
 		defaultValue: "1000",
 		label:        "<milliseconds>",
 		description: `
-Specifies an interval, in milliseconds, at which a Fireworq daemon checks if configurations (such as queue definitions or routings) are changed by other daemons.
+Specifies an interval, in milliseconds, at which a Middleman daemon checks if configurations (such as queue definitions or routings) are changed by other daemons.
 `,
 	},
 	"driver": {
@@ -92,11 +92,11 @@ Specifies an interval, in milliseconds, at which a Fireworq daemon checks if con
 		description: `
 Specifies a driver for job queues and repositories.  The available values are ` + "`" + `mysql` + "`" + ` and ` + "`in-memory`" + `.
 
-Note that ` + "`in-memory`" + ` driver is not for production use.  It is intended to be used for just playing with Fireworq without a storage middleware or to show the upper bound of performance in a benchmark.
+Note that ` + "`in-memory`" + ` driver is not for production use.  It is intended to be used for just playing with Middleman without a storage middleware or to show the upper bound of performance in a benchmark.
 `,
 	},
 	"mysql_dsn": {
-		defaultValue: "tcp(localhost:3306)/fireworq",
+		defaultValue: "tcp(localhost:3306)/middleman",
 		label:        "<DSN>",
 		description: `
 Specifies a data source name for the job queue and the repository database in a form <code><var>user</var>:<var>password</var>@tcp(<var>mysql_host</var>:<var>mysql_port</var>)/<var>database</var>?<var>options</var></code>.  This is in effect only when [the driver](#env-driver) is ` + "`" + `mysql` + "`" + ` and is mandatory for that case.
@@ -122,7 +122,7 @@ If you already have a queue with the specified name in the job queue database, t
 		defaultValue: "200",
 		label:        "<milliseconds>",
 		description: `
-Specifies the default interval, in milliseconds, at which Fireworq checks the arrival of new jobs, used when ` + "`" + `polling_interval` + "`" + ` in the [queue API][api-put-queue] is omitted.
+Specifies the default interval, in milliseconds, at which Middleman checks the arrival of new jobs, used when ` + "`" + `polling_interval` + "`" + ` in the [queue API][api-put-queue] is omitted.
 `,
 	},
 	"queue_default_max_workers": {
@@ -142,7 +142,7 @@ Each line in the file is a JSON string corresponds to a single log item.
 `,
 	},
 	"queue_log_tag": {
-		defaultValue: "fireworq.queue",
+		defaultValue: "middleman.queue",
 		label:        "<tag>",
 		description: `
 Specifies the value of ` + "`" + `tag` + "`" + ` field in a job queue log item JSON.
@@ -167,7 +167,7 @@ Specifies a data source name for the job queue database in a form <code><var>use
 		defaultValue: "",
 		label:        "<agent>",
 		description: `
-Specifies the value of ` + "`" + `User-Agent` + "`" + ` header field used for an HTTP request to a worker.  The default value is <code>Fireworq/<var>version</var></code>.
+Specifies the value of ` + "`" + `User-Agent` + "`" + ` header field used for an HTTP request to a worker.  The default value is <code>Middleman/<var>version</var></code>.
 `,
 	},
 	"dispatch_keep_alive": {

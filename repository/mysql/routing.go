@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"sync"
 
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/repository"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/repository"
 )
 
 type routingRepository struct {

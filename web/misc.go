@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 )
 
 func (app *Application) serveVersion(w http.ResponseWriter, req *http.Request) error {

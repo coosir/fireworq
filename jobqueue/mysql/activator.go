@@ -60,7 +60,7 @@ func (a *activator) isActive() bool {
 }
 
 func (a *activator) lockName() string {
-	return fmt.Sprintf("fireworq_jq(%s)", a.queueName)
+	return fmt.Sprintf("middleman_jq(%s)", a.queueName)
 }
 
 // File private methods

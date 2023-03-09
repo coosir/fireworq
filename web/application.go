@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/repository"
-	"github.com/fireworq/fireworq/service"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/repository"
+	"github.com/coosir/middleman/service"
 
 	stats "github.com/fukata/golang-stats-api-handler"
 	"github.com/rs/zerolog/log"

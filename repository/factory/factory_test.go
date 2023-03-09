@@ -3,7 +3,7 @@ package factory
 import (
 	"testing"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 )
 
 func TestInvalidDriver(t *testing.T) {

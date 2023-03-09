@@ -12,7 +12,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/fireworq/fireworq/jobqueue"
+	"github.com/coosir/middleman/jobqueue"
 )
 
 type failureLog struct {

@@ -5,12 +5,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/test"
-	"github.com/fireworq/fireworq/test/jobqueue"
-	"github.com/fireworq/fireworq/test/mysql"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/test"
+	"github.com/coosir/middleman/test/jobqueue"
+	"github.com/coosir/middleman/test/mysql"
 )
 
 func TestMain(m *testing.M) {

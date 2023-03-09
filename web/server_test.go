@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 
 	serverstarter "github.com/lestrrat-go/server-starter/listener"
 )

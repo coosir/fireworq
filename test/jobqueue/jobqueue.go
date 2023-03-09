@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/jobqueue"
+	"github.com/coosir/middleman/jobqueue"
 )
 
 type job struct {
@@ -95,7 +95,7 @@ type SubtestRunner func(t *testing.T, db, q string, tests []Subtest)
 
 // TestSubtests runs predefined subtests by the specified runner.
 func TestSubtests(t *testing.T, runner SubtestRunner) {
-	runner(t, "fireworq_test", "test_queue", []Subtest{
+	runner(t, "middleman_test", "test_queue", []Subtest{
 		subtestActive,
 		subtestEmpty,
 		subtestPush1,

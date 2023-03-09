@@ -1,24 +1,22 @@
-//go:generate go-assets-builder -p main -o assets.go LICENSE AUTHORS CREDITS
 package main
 
 import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/signal"
 	"path/filepath"
 	"strings"
 	"syscall"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/dispatcher"
-	"github.com/fireworq/fireworq/jobqueue/logger"
-	logwriter "github.com/fireworq/fireworq/log"
-	repository "github.com/fireworq/fireworq/repository/factory"
-	"github.com/fireworq/fireworq/service"
-	"github.com/fireworq/fireworq/web"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/dispatcher"
+	"github.com/coosir/middleman/jobqueue/logger"
+	logWriter "github.com/coosir/middleman/log"
+	repository "github.com/coosir/middleman/repository/factory"
+	"github.com/coosir/middleman/service"
+	"github.com/coosir/middleman/web"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -35,17 +33,7 @@ func main() {
 	}
 
 	if args.showVersion {
-		fmt.Fprintln(out, versionString(" "))
-		os.Exit(0)
-	}
-
-	if args.showLicense {
-		fmt.Println(licenseText)
-		os.Exit(0)
-	}
-
-	if args.showCredits {
-		fmt.Println(creditsText)
+		_, _ = fmt.Fprintln(out, versionString(" "))
 		os.Exit(0)
 	}
 
@@ -63,8 +51,6 @@ func main() {
 
 type cmdArgs struct {
 	showVersion bool
-	showLicense bool
-	showCredits bool
 	settings    map[string]*string
 }
 
@@ -78,16 +64,14 @@ func parseCmdArgs(args []string) (*cmdArgs, error) {
 	flags := flag.NewFlagSet(Name, flag.ContinueOnError)
 	flags.SetOutput(out)
 	flags.Usage = func() {
-		fmt.Fprint(out, helpText)
+		_, _ = fmt.Fprint(out, helpText)
 		for _, item := range config.Descriptions() {
 			fmt.Println("")
-			fmt.Fprintf(out, item.Describe(2, 80-4))
+			_, _ = fmt.Fprintf(out, item.Describe(2, 80-4))
 		}
 	}
 	flags.BoolVar(&parsed.showVersion, "v", false, "")
 	flags.BoolVar(&parsed.showVersion, "version", false, "")
-	flags.BoolVar(&parsed.showLicense, "license", false, "")
-	flags.BoolVar(&parsed.showCredits, "credits", false, "")
 
 	for _, k := range config.Keys() {
 		p := new(string)
@@ -133,22 +117,25 @@ func initProcess() {
 	if err != nil {
 		log.Panic().Msg(err.Error())
 	}
-	defer file.Close()
+	defer func() {
+		err = file.Close()
+		log.Error().Msg(err.Error())
+	}()
 
 	if _, err := fmt.Fprintf(file, "%d\n", pid); err != nil {
 		log.Error().Msg(err.Error())
 	}
 }
 
-func initLogging(sig syscall.Signal) (accessLog logwriter.Writer) {
+func initLogging(sig syscall.Signal) (accessLog logWriter.Writer) {
 	// Access log
 
-	accessLog = logwriter.New(os.Stdout)
+	accessLog = logWriter.New(os.Stdout)
 
 	accessLogFile := config.Get("access_log")
 	if len(accessLogFile) > 0 {
 		var err error
-		accessLog, err = logwriter.OpenFile(accessLogFile)
+		accessLog, err = logWriter.OpenFile(accessLogFile)
 		if err != nil {
 			log.Error().Msg(err.Error())
 		}
@@ -156,16 +143,16 @@ func initLogging(sig syscall.Signal) (accessLog logwriter.Writer) {
 
 	// Error log
 
-	errorLog := logwriter.New(zerolog.ConsoleWriter{Out: os.Stderr})
+	errorLog := logWriter.New(zerolog.ConsoleWriter{Out: os.Stderr})
 
 	errorLevel := zerolog.InfoLevel
-	errorLevel = logwriter.ParseLevel(config.Get("error_log_level"), errorLevel)
+	errorLevel = logWriter.ParseLevel(config.Get("error_log_level"), errorLevel)
 	zerolog.SetGlobalLevel(errorLevel)
 
 	errorLogFile := config.Get("error_log")
 	if len(errorLogFile) > 0 {
 		var err error
-		errorLog, err = logwriter.OpenFile(errorLogFile)
+		errorLog, err = logWriter.OpenFile(errorLogFile)
 		if err != nil {
 			log.Error().Msg(err.Error())
 		}
@@ -177,11 +164,11 @@ func initLogging(sig syscall.Signal) (accessLog logwriter.Writer) {
 
 	// Reopening log files (for logrotate)
 
-	sigc := make(chan os.Signal, 1)
-	signal.Notify(sigc, sig)
+	sigC := make(chan os.Signal, 1)
+	signal.Notify(sigC, sig)
 	go func() {
 		for {
-			s := <-sigc
+			s := <-sigC
 			log.Info().Msgf("Received signal %q; reopen log files", s)
 			if err := accessLog.Reopen(); err != nil {
 				log.Error().Msg(err.Error())
@@ -202,12 +189,12 @@ func startServer(accessLogWriter io.Writer) {
 	log.Info().Msg("Starting a job dispatcher...")
 
 	repos := repository.NewRepositories()
-	service := service.NewService(repos)
+	dService := service.NewService(repos)
 
 	app := &web.Application{
 		AccessLogWriter:   accessLogWriter,
 		Version:           versionString(" "),
-		Service:           service,
+		Service:           dService,
 		QueueRepository:   repos.Queue,
 		RoutingRepository: repos.Routing,
 	}
@@ -228,48 +215,14 @@ func versionString(sep string) string {
 	return strings.Join([]string{Name, sep, Version, prerelease, build}, "")
 }
 
-func mustAssetString(path string) string {
-	f, err := Assets.Open(path)
-	if err != nil {
-		panic(err)
-	}
-
-	buf, err := ioutil.ReadAll(f)
-	if err != nil {
-		panic(err)
-	}
-
-	return string(buf)
-}
-
 var (
-	licenseText = mustAssetString("/LICENSE") + `
-   Copyright (c) 2017 The Fireworq Authors. All rights reserved.
+	helpText = `Usage: middleman [options]
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-` + mustAssetString("/AUTHORS")
-	creditsText = mustAssetString("/CREDITS")
-
-	helpText = `Usage: fireworq [options]
-
-  A lightweight, high performance job queue system.
+  A lightweight, high-performance, stand-alone job queue system.
 
 Options:
 
   --version, -v  Show the version string.
-  --license      Show the license text.
-  --credits      Show the library dependencies and their licenses.
   --help, -h     Show the help message.
 `
 )

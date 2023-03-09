@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/jobqueue/factory"
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/test"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/jobqueue/factory"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/test"
 )
 
 func TestMain(m *testing.M) {

@@ -7,8 +7,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/repository"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/repository"
 )
 
 type queueStorage struct {

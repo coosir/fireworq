@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/fireworq/fireworq/model"
+import "github.com/coosir/middleman/model"
 
 // QueueRepository is an interface of a queue repository.
 type QueueRepository interface {

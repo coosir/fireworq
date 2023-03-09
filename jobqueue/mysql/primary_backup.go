@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"strings"
 
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/model"
 )
 
 type primaryBackupJobQueue struct {

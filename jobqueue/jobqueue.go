@@ -1,8 +1,8 @@
 package jobqueue
 
 import (
-	"github.com/fireworq/fireworq/jobqueue/logger"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/jobqueue/logger"
+	"github.com/coosir/middleman/model"
 
 	"github.com/rs/zerolog/log"
 )

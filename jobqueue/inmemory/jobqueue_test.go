@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/test"
-	"github.com/fireworq/fireworq/test/jobqueue"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/test"
+	"github.com/coosir/middleman/test/jobqueue"
 )
 
 func TestMain(m *testing.M) {

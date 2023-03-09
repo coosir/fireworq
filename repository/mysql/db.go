@@ -1,14 +1,11 @@
-//go:generate go-assets-builder -p mysql -o assets.go ../../data/repository
-
 package mysql
 
 import (
 	"database/sql"
-	"io/ioutil"
+	"github.com/coosir/middleman/config"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-
+	"github.com/coosir/middleman/data"
 	_ "github.com/go-sql-driver/mysql" // initialize the driver
 	"github.com/rs/zerolog/log"
 )
@@ -17,10 +14,10 @@ var schema []string
 
 func init() {
 	schema = []string{
-		"/data/repository/mysql/schema/queue.sql",
-		"/data/repository/mysql/schema/queue_throttle.sql",
-		"/data/repository/mysql/schema/routing.sql",
-		"/data/repository/mysql/schema/config_revision.sql",
+		"repository/mysql/schema/queue.sql",
+		"repository/mysql/schema/queue_throttle.sql",
+		"repository/mysql/schema/routing.sql",
+		"repository/mysql/schema/config_revision.sql",
 	}
 }
 
@@ -58,19 +55,14 @@ func NewDB() (*sql.DB, error) {
 		db.SetConnMaxLifetime(time.Duration(t) * time.Second)
 	}()
 
+	EFS := data.EFS
 	for _, path := range schema {
-		f, err := Assets.Open(path)
+		f, err := EFS.ReadFile(path)
 		if err != nil {
 			log.Panic().Msg(err.Error())
 		}
 
-		query, err := ioutil.ReadAll(f)
-		f.Close()
-		if err != nil {
-			log.Panic().Msg(err.Error())
-		}
-
-		_, err = db.Exec(string(query))
+		_, err = db.Exec(string(f))
 		if err != nil {
 			return nil, err
 		}

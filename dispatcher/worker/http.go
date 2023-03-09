@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
 
 	"github.com/rs/zerolog"
 )

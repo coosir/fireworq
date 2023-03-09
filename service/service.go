@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/fireworq/fireworq/config"
-	jobqueue "github.com/fireworq/fireworq/jobqueue/factory"
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/repository"
+	"github.com/coosir/middleman/config"
+	jobqueue "github.com/coosir/middleman/jobqueue/factory"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/repository"
 
 	"github.com/rs/zerolog/log"
 )

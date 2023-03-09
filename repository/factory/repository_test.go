@@ -3,8 +3,8 @@ package factory
 import (
 	"testing"
 
-	"github.com/fireworq/fireworq/model"
-	"github.com/fireworq/fireworq/test"
+	"github.com/coosir/middleman/model"
+	"github.com/coosir/middleman/test"
 )
 
 func TestMain(m *testing.M) {

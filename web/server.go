@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fireworq/fireworq/config"
+	"github.com/coosir/middleman/config"
 
 	"github.com/gorilla/mux"
 	serverstarter "github.com/lestrrat-go/server-starter/listener"

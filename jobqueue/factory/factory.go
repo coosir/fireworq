@@ -1,25 +1,25 @@
 package factory
 
 import (
-	"github.com/fireworq/fireworq/config"
-	"github.com/fireworq/fireworq/jobqueue"
-	"github.com/fireworq/fireworq/jobqueue/inmemory"
-	"github.com/fireworq/fireworq/jobqueue/mysql"
-	"github.com/fireworq/fireworq/model"
+	"github.com/coosir/middleman/config"
+	"github.com/coosir/middleman/jobqueue"
+	"github.com/coosir/middleman/jobqueue/inmemory"
+	"github.com/coosir/middleman/jobqueue/mysql"
+	"github.com/coosir/middleman/model"
 
 	"github.com/rs/zerolog/log"
 )
 
 // IncomingJob imitates IncomingJob in jobqueue package: factory
 // package is intended to be used as a jobqueue package (by import
-// jobqueue ".../fireworq/jobqueue/factory" since the only reason for
+// jobqueue ".../middleman/jobqueue/factory" since the only reason for
 // having a separate package is to avoid cyclic import with a driver
 // package such as mysql.
 type IncomingJob = jobqueue.IncomingJob
 
 // JobQueue imitates JobQueue in jobqueue package: factory package is
 // intended to be used as a jobqueue package (by import jobqueue
-// ".../fireworq/jobqueue/factory" since the only reason for having a
+// ".../middleman/jobqueue/factory" since the only reason for having a
 // separate package is to avoid cyclic import with a driver package
 // such as mysql.
 type JobQueue = jobqueue.JobQueue
